@@ -3,7 +3,7 @@
 // ==UserScript==
 // @name         SecureSurf
 // @namespace    https://github.com/MrGovindDubey/SecureSurf/
-// @version      2.0
+// @version      1.0
 // @description  Enhance your online security with SecureSurf. Meticulously scans URLs for potential threats, providing real-time alerts for malicious websites.
 // @include      *
 // @grant        GM_xmlhttpRequest
@@ -20,23 +20,6 @@
 (function() {
     'use strict';
 
-    // List of API keys
-    const apiKeys = [
-        'API_KEY_1',       
-        // 'API_KEY_2'
-        // 'API_KEY_3'
-        // 'API_KEY_4'
-    ];
-
-    let apiKeyIndex = 0;
-
-    // Function to get the current API key
-    function getCurrentApiKey() {
-        const apiKey = apiKeys[apiKeyIndex];
-        apiKeyIndex = (apiKeyIndex + 1) % apiKeys.length; // Rotate index
-        return apiKey;
-    }
-
     // Configuration
     const threshold = GM_getValue('threshold', 5); // Default threshold for displaying warning
 
@@ -47,33 +30,26 @@
 
     // Function to send URL to VirusTotal for scanning
     function scanUrlWithVirusTotal(url) {
-        const apiKey = getCurrentApiKey();
+
+
+
+        const apiKey = 'API_KEY';                    // ADD YOUR API KEY HERE 
+
+
+
         const apiUrl = `https://www.virustotal.com/vtapi/v2/url/report?apikey=${apiKey}&resource=${url}`;
 
         GM_xmlhttpRequest({
             method: "GET",
             url: apiUrl,
             onload: function(response) {
-                if (response.status === 200) {
-                    const data = JSON.parse(response.responseText);
-                    if (data.response_code === 1) {
-                        const positives = data.positives || 0;
-                        if (positives > 0 && positives <= 2) {
-                            displayWarningMessage(data);
-                        } else if (positives > threshold) {
-                            displayWarningModal(data);
-                        }
-                    } else {
-                        console.error("VirusTotal API error:", data.verbose_msg || "Unknown error");
-                    }
-                } else {
-                    console.error("VirusTotal API request failed with status:", response.status);
-                    // Retry with a different API key if request fails
-                    if (apiKeyIndex < apiKeys.length - 1) {
-                        apiKeyIndex++;
-                        scanUrlWithVirusTotal(url); // Retry with the next API key
-                    } else {
-                        console.error("All API keys exhausted. Unable to scan URL.");
+                const data = JSON.parse(response.responseText);
+                if (data.response_code === 1) {
+                    const positives = data.positives || 0;
+                    if (positives > 0 && positives <= 2) {
+                        displayWarningMessage(data);
+                    } else if (positives > threshold) {
+                        displayWarningModal(data);
                     }
                 }
             },
@@ -83,7 +59,7 @@
         });
     }
 
-    // Function to display warning message
+    // Function to display warning message if only 1 or 2 antivirus engines detect the website as malware
     function displayWarningMessage(data) {
         const warningMessage = document.createElement('div');
         const detectedEngines = Object.entries(data.scans)
@@ -100,73 +76,75 @@
         document.body.appendChild(warningMessage);
     }
 
-    // Function to display warning modal
-    function displayWarningModal(data) {
-        // Filter out antivirus engines that detected the website as clean
-        const detectedEngines = Object.entries(data.scans)
-            .filter(([_, result]) => result.detected)
-            .map(([engine, _]) => engine);
+// Function to display warning modal covering the entire viewport
+function displayWarningModal(data) {
+    // Filter out antivirus engines that detected the website as clean
+    const detectedEngines = Object.entries(data.scans)
+        .filter(([_, result]) => result.detected)
+        .map(([engine, _]) => engine);
 
-        // Create modal background covering the entire viewport
-        const modalBackground = document.createElement('div');
-        modalBackground.style.position = 'fixed';
-        modalBackground.style.top = '0';
-        modalBackground.style.left = '0';
-        modalBackground.style.width = '100%';
-        modalBackground.style.height = '100%';
-        modalBackground.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
-        modalBackground.style.zIndex = '9999';
+    // Create modal background covering the entire viewport
+    const modalBackground = document.createElement('div');
+    modalBackground.style.position = 'fixed';
+    modalBackground.style.top = '0';
+    modalBackground.style.left = '0';
+    modalBackground.style.width = '100%';
+    modalBackground.style.height = '100%';
+    modalBackground.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+    modalBackground.style.zIndex = '9999';
 
-        // Append modal background to the body
-        document.body.appendChild(modalBackground);
+    // Append modal background to the body
+    document.body.appendChild(modalBackground);
 
-        // Create modal content centered on the page with a larger content box
-        const modalContent = document.createElement('div');
-        modalContent.style.position = 'absolute';
-        modalContent.style.top = '50%';
-        modalContent.style.left = '50%';
-        modalContent.style.transform = 'translate(-50%, -50%)';
-        modalContent.style.backgroundColor = '#f8f9fa';
-        modalContent.style.padding = '40px'; // Increased padding
-        modalContent.style.border = '2px solid #dc3545';
-        modalContent.style.borderRadius = '10px';
-        modalContent.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
-        modalContent.style.maxWidth = '80%';
-        modalContent.style.textAlign = 'center';
-        modalContent.style.fontFamily = 'Arial, sans-serif';
-        modalContent.innerHTML = `
-            <h2 style="margin-top: 0;">Warning: Potential Malicious Website</h2>
-            <p style="text-align: left;">The website you are visiting has been flagged by ${data.positives} out of ${data.total} antivirus engines on VirusTotal as potentially malicious.</p>
-            <p style="text-align: left;">Scan Date: ${data.scan_date}</p>
-            <p style="text-align: left;">Scanning Engines:</p>
-            <ul style="text-align: left; margin-top: 0;">
-                ${detectedEngines.map(engine => `<li>${engine}</li>`).join('')}
-            </ul>
-            <p style="text-align: left;">Domain Information:</p>
-            <ul style="text-align: left; margin-top: 0;">
-                <li>Domain: ${data.url}</li>
-                <li>Domain IP: ${data.ip}</li>
-            </ul>
-            <button id="closeVirusTotalModal" style="
-                background-color: #dc3545;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-top: 20px;
-            ">Close</button>
-        `;
+    // Create modal content centered on the page with a larger content box
+    const modalContent = document.createElement('div');
+    modalContent.style.position = 'absolute';
+    modalContent.style.top = '50%';
+    modalContent.style.left = '50%';
+    modalContent.style.transform = 'translate(-50%, -50%)';
+    modalContent.style.backgroundColor = '#f8f9fa';
+    modalContent.style.padding = '40px'; // Increased padding
+    modalContent.style.border = '2px solid #dc3545';
+    modalContent.style.borderRadius = '10px';
+    modalContent.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
+    modalContent.style.maxWidth = '80%';
+    modalContent.style.textAlign = 'center';
+    modalContent.style.fontFamily = 'Arial, sans-serif';
+    modalContent.innerHTML = `
+        <h2 style="margin-top: 0;">Warning: Potential Malicious Website</h2>
+        <p style="text-align: left;">The website you are visiting has been flagged by ${data.positives} out of ${data.total} antivirus engines on VirusTotal as potentially malicious.</p>
+        <p style="text-align: left;">Scan Date: ${data.scan_date}</p>
+        <p style="text-align: left;">Scanning Engines:</p>
+        <ul style="text-align: left; margin-top: 0;">
+            ${detectedEngines.map(engine => `<li>${engine}</li>`).join('')}
+        </ul>
+        <p style="text-align: left;">Domain Information:</p>
+        <ul style="text-align: left; margin-top: 0;">
+            <li>Domain: ${data.url}</li>
+            <li>Domain IP: ${data.ip}</li>
+        </ul>
+        <button id="closeVirusTotalModal" style="
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        ">Close</button>
+    `;
 
-        // Append modal content to the modal background
-        modalBackground.appendChild(modalContent);
+    // Append modal content to the modal background
+    modalBackground.appendChild(modalContent);
 
-        // Close modal event listener
-        const closeModalButton = document.getElementById('closeVirusTotalModal');
-        closeModalButton.addEventListener('click', function() {
-            modalBackground.remove();
-        });
-    }
+    // Close modal event listener
+    const closeModalButton = document.getElementById('closeVirusTotalModal');
+    closeModalButton.addEventListener('click', function() {
+        modalBackground.remove();
+    });
+}
+
+
 
     // Main function to execute script
     function main() {
