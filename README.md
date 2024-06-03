@@ -1,5 +1,14 @@
-# SecureSurf
+
+
+<h1 align="center">SecureSurf</h1>
+<p align="center">
+  <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/cd950dff-640f-410f-a5e5-389288bd9c3a" alt="Alt Text" width="500"\>
+</p>
+
+
  SecureSurf fortifies your online security by meticulously scanning URLs for potential threats. Receive instant alerts upon detecting malicious websites, ensuring your browsing experience is consistently secure and protected.
+
+
 
 
 
