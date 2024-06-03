@@ -62,3 +62,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Author
 SecureSurf is developed by Mr Govind Dubey.
+
+### Enhance your online security with SecureSurf. Stay safe!
