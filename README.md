@@ -70,7 +70,7 @@ Contributions are welcome! Please open an issue or submit a pull request on GitH
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-## Author
+
 ## Author
 
 SecureSurf is developed by [Mr Govind Dubey](https://www.linkedin.com/in/mr-govind-dubey/). Don't forget to star 🌟 the repository if you find it useful!
