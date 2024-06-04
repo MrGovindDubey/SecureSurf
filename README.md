@@ -17,7 +17,12 @@
 - **Real-time URL Scanning**: Automatically scans the current URL for potential threats .
 - **API Key Management**: Supports multiple API keys with automatic rotation to avoid hitting API rate limits.
 - **Threat Detection Alerts**: Displays warning messages and modals when a threat is detected, with detailed information about the detection.
+- **Antivirus Detection:** SecureSurf lists the names of antivirus engines that detected the potential threat along with the warning alert.
 - **Customizable Threshold**: Allows users to set a threshold for the number of detections that trigger alerts.
+
+
+
+
 
 ## Installation
 
