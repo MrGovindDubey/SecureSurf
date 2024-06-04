@@ -35,27 +35,8 @@
 
 Once installed, SecureSurf will automatically run on all websites you visit. It will scan the current URL and provide real-time alerts if any threats are detected.
 
-## Configuration
-
-### Setting the Threshold(optional)
-
-You can set the threshold for the number of detections that trigger alerts. The default threshold is 5.
-
-To change the threshold:
-1. Open the UserScript manager.
-2. Find the SecureSurf script.
-3. Modify the line `const threshold = GM_getValue('threshold', 5);` to your desired value.
-
-## Adding API Keys
-
-
-
-To add more API keys:
-1. Open the UserScript manager.
-2. Find the SecureSurf script.
-3. Add your API keys to the `apiKeys` array:
-
-### Obtaining a VirusTotal API Key
+## Setup:
+### Obtaining API Key
 
 1. Go to the [VirusTotal](https://www.virustotal.com/) website.
 2. Sign up for a free account if you don't already have one.
@@ -63,15 +44,25 @@ To add more API keys:
 4. Locate the API Key section. Here you will find your personal API key.
 5. Copy the API key.
 
-```javascript
-const apiKeys = [
-    'YOUR_API_KEY_1',
-    'YOUR_API_KEY_2',
-    'YOUR_API_KEY_3',
-    // Add more API keys as needed
-];
+## Setup
 
-```
+1. Open the `SecureSurf.js` file in a text editor.
+2. Locate the following section in the script:
+   ```javascript
+   const apiKeys = [
+       'API_KEY_1',       
+       // 'API_KEY_2'
+       // 'API_KEY_3'
+       // 'API_KEY_4'
+   ];
+   ```
+3. Replace 'API_KEY_1' with the API key you copied from VirusTotal.
+4. Save the changes to the SecureSurf.js file.
+
+
+### Configuration (Optional)
+Threshold: The default threshold for displaying the warning modal is set to 5. You can change this value by modifying the threshold variable in the script.
+
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
@@ -80,7 +71,10 @@ Contributions are welcome! Please open an issue or submit a pull request on GitH
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Author
-SecureSurf is developed by Mr Govind Dubey.
+## Author
+
+SecureSurf is developed by [Mr Govind Dubey](https://www.linkedin.com/in/mr-govind-dubey/). Don't forget to star 🌟 the repository if you find it useful!
+
 
 ### Enhance your online security with SecureSurf. Stay safe!
 <p align="center">
