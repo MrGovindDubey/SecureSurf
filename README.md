@@ -37,7 +37,7 @@ Once installed, SecureSurf will automatically run on all websites you visit. It 
 
 ## Configuration
 
-### Setting the Threshold
+### Setting the Threshold(optional)
 
 You can set the threshold for the number of detections that trigger alerts. The default threshold is 5.
 
@@ -46,12 +46,22 @@ To change the threshold:
 2. Find the SecureSurf script.
 3. Modify the line `const threshold = GM_getValue('threshold', 5);` to your desired value.
 
-### Adding API Keys
+## Adding API Keys
+
+
 
 To add more API keys:
 1. Open the UserScript manager.
 2. Find the SecureSurf script.
 3. Add your API keys to the `apiKeys` array:
+
+### Obtaining a VirusTotal API Key
+
+1. Go to the [VirusTotal](https://www.virustotal.com/) website.
+2. Sign up for a free account if you don't already have one.
+3. After logging in, navigate to your profile settings.
+4. Locate the API Key section. Here you will find your personal API key.
+5. Copy the API key.
 
 ```javascript
 const apiKeys = [
