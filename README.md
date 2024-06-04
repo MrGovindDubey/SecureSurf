@@ -74,7 +74,8 @@ SecureSurf is developed by Mr Govind Dubey.
 
 ### Enhance your online security with SecureSurf. Stay safe!
 <p align="center">
-  <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/d6403673-fe13-495e-b0b2-4e4bcebdc362" alt="Alt Text" width="300"\>
+  <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/b3fa470f-1577-4840-b878-e2376a3c10a4" alt="Alt Text" width="300"\>
 </p>
+
 
 
