@@ -89,14 +89,27 @@
         const detectedEngines = Object.entries(data.scans)
             .filter(([_, result]) => result.detected)
             .map(([engine, _]) => engine);
+
+        // Image element
+        const img = document.createElement('img');
+        img.src = 'https://i.imgur.com/I4yKneU.png'; // Replace with your image URL
+        img.style.width = '100px';
+        img.style.height = '100px';
+        img.style.position = 'fixed';
+        img.style.top = '10px';
+        img.style.right = '10px';
+        img.style.zIndex = '10000';
+
         warningMessage.textContent = `Malware detected by ${detectedEngines.join(', ')}`;
         warningMessage.style.position = 'fixed';
-        warningMessage.style.top = '10px';
+        warningMessage.style.top = '70px'; // Adjusted to accommodate image
         warningMessage.style.right = '10px';
         warningMessage.style.padding = '10px';
         warningMessage.style.backgroundColor = 'red';
         warningMessage.style.color = 'white';
         warningMessage.style.zIndex = '9999';
+
+        document.body.appendChild(img);
         document.body.appendChild(warningMessage);
     }
 
@@ -114,7 +127,7 @@
         modalBackground.style.left = '0';
         modalBackground.style.width = '100%';
         modalBackground.style.height = '100%';
-        modalBackground.style.backgroundColor = 'rgba(255, 0, 0, 0.5)';
+        modalBackground.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
         modalBackground.style.zIndex = '9999';
 
         // Append modal background to the body
@@ -134,9 +147,22 @@
         modalContent.style.maxWidth = '80%';
         modalContent.style.textAlign = 'center';
         modalContent.style.fontFamily = 'Arial, sans-serif';
+
+// Image element
+const img = document.createElement('img');
+img.src = 'https://i.imgur.com/GIwCuqW.png'; // Replace with your image URL
+img.style.width = '200px'; // Increased size
+img.style.height = '200px'; // Increased size
+img.style.display = 'block';
+img.style.margin = '0 auto 20px';
+img.style.cursor = 'pointer'; // Change cursor to pointer to indicate it's clickable
+img.onclick = function() {
+    window.open('https://github.com/MrGovindDubey/SecureSurf', '_blank'); // Replace with your GitHub repository URL
+};
+
         modalContent.innerHTML = `
             <h2 style="margin-top: 0;">Warning: Potential Malicious Website</h2>
-            <p style="text-align: left;">The website you are visiting has been flagged by ${data.positives} out of ${data.total} antivirus engines on VirusTotal as potentially malicious.</p>
+            <p style="text-align: left;">The website you are visiting has been flagged by ${data.positives} out of ${data.total} antivirus engines  as potentially malicious.</p>
             <p style="text-align: left;">Scan Date: ${data.scan_date}</p>
             <p style="text-align: left;">Scanning Engines:</p>
             <ul style="text-align: left; margin-top: 0;">
@@ -157,6 +183,9 @@
                 margin-top: 20px;
             ">Close</button>
         `;
+
+        // Append image to modal content
+        modalContent.insertBefore(img, modalContent.firstChild);
 
         // Append modal content to the modal background
         modalBackground.appendChild(modalContent);
