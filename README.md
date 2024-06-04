@@ -44,7 +44,7 @@ Once installed, SecureSurf will automatically run on all websites you visit. It 
 ## Setup :
 ### Obtaining API Key
 
-1. Go to the [VirusTotal]([https://www.virustotal.com/](https://www.virustotal.com/gui/sign-in)) website.
+1. Go to the [VirusTotal](https://www.virustotal.com/gui/sign-in) website.
 2. Sign up for a free account if you don't already have one.
 3. After logging in, navigate to your profile settings.
 4. Locate the API Key section. Here you will find your personal API key.
