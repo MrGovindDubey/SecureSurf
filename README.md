@@ -14,7 +14,7 @@
 
 ## Features
 
-- **Real-time URL Scanning**: Automatically scans the current URL for potential threats using VirusTotal API.
+- **Real-time URL Scanning**: Automatically scans the current URL for potential threats .
 - **API Key Management**: Supports multiple API keys with automatic rotation to avoid hitting API rate limits.
 - **Threat Detection Alerts**: Displays warning messages and modals when a threat is detected, with detailed information about the detection.
 - **Customizable Threshold**: Allows users to set a threshold for the number of detections that trigger alerts.
@@ -28,7 +28,7 @@
 
 2. **Install SecureSurf**:
    - Open your UserScript manager and create a new script.
-   - Copy and paste the contents of the `SecureSurf.user.js` file into the script editor.
+   - Copy and paste the contents of the `SecureSurf.user.js` file into the script editor (Fork) .
    - Save the script.
 
 ## Usage
