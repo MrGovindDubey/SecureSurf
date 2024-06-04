@@ -41,7 +41,7 @@
 
 Once installed, SecureSurf will automatically run on all websites you visit. It will scan the current URL and provide real-time alerts if any threats are detected.
 
-## Setup:
+## Setup :
 ### Obtaining API Key
 
 1. Go to the [VirusTotal]([https://www.virustotal.com/](https://www.virustotal.com/gui/sign-in)) website.
@@ -68,6 +68,22 @@ Once installed, SecureSurf will automatically run on all websites you visit. It 
 
 ### Configuration (Optional)
 Threshold: The default threshold for displaying the warning modal is set to 5. You can change this value by modifying the threshold variable in the script.
+
+
+## Images (Alerts)
+
+
+
+<p align="center">
+  <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/63f75085-a01d-4de2-b124-fcd54014d849.png" alt="Alt Text" style="width: 700px;  ">
+  <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/9c9e9935-fc4b-4eff-8c21-f0a535804465.png" alt="Alt Text" style="width: 700px;  ">
+</p>
+
+
+
+
+
+
 
 
 ## Contributing
