@@ -2,7 +2,9 @@
 
 <h1 align="center">SecureSurf</h1>
 <p align="center">
+  <a href="https://github.com/MrGovindDubey/SecureSurf" >
   <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/b47775d8-2a35-45e2-b624-78fef1b0418f" alt="Alt Text" width="500"\>
+  </a>
 </p>
 
 
@@ -100,7 +102,9 @@ SecureSurf is developed by [Mr Govind Dubey](https://www.linkedin.com/in/mr-govi
 
 ### Enhance your online security with SecureSurf. Stay safe!
 <p align="center">
+   <a href="https://github.com/MrGovindDubey/SecureSurf" >
   <img src="https://github.com/MrGovindDubey/SecureSurf/assets/118271775/b3fa470f-1577-4840-b878-e2376a3c10a4" alt="Alt Text" width="300"\>
+    <a/>
 </p>
 
 
